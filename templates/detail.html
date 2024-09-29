@@ -1,0 +1,172 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>ParsingApp-Info</title>
+     <style>
+          body {
+               font-family: Arial, sans-serif;
+               margin: 20px;
+               background-color: #f9f9f9;
+               color: #333;
+          }
+          h1, h2 {
+               color: #007bff;
+          }
+          h1 {
+               font-size: 28px;
+               margin-bottom: 20px;
+               text-align: center;
+          }
+          h2 {
+               font-size: 24px;
+               margin-top: 30px;
+               margin-bottom: 15px;
+          }
+          p, ul {
+               line-height: 1.6;
+               font-size: 16px;
+               margin-bottom: 20px;
+          }
+          ul {
+               padding-left: 20px;
+          }
+          li {
+               margin-bottom: 10px;
+          }
+          .description, .sub_description {
+               background-color: #ffffff;
+               padding: 20px;
+               border-radius: 8px;
+               box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+               margin-bottom: 20px;
+          }
+          .sub_description {
+               font-size: 14px;
+               color: #555;
+          }
+          img {
+               margin: 15px 0;
+               max-width: 100%;
+               height: auto;
+               border: 1px solid #ddd;
+               border-radius: 5px;
+               box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+          }
+          .note {
+               font-style: italic;
+               color: #555;
+          }
+          .highlight {
+               font-weight: bold;
+               color: #007bff;
+          }
+          button {
+               padding: 10px 15px;
+               background-color: #007bff;
+               color: white;
+               border: none;
+               border-radius: 5px;
+               cursor: pointer;
+               font-size: 16px;
+          }
+          button:hover {
+               background-color: #0056b3;
+          }
+
+     </style>
+</head>
+<body>
+     <div>
+          <h1>ParsingApp-Web Çalışma Mantığı</h1>
+          <p class="description">
+               ParsingApp-Web ile beraber, kullanıcıların sıkıştırılmış olarak tuttuğu anlamlı veri yapıları, sisteme yine kullanıcıların yüklediği belli kurallara sahip model dosyaları doğrultusunda ayrıştırılarak küçük anlamlı parçalara ayrılır. Böylece kullanıcılar bu verileri daha kolay bir şekilde analiz edebilir ve işlemlerini gerçekleştirebilir. Analiz ve işlemler tamamlandıktan sonra kullanıcının isteği doğrultusunda verileri sıkıştırılmış bir şekilde tekrar sunar.
+               <br><br>
+               <span class="sub_description">Not: ParsingApp-Web içinde bulunan butonlar ve yüklenmesi gereken dosyaların standartları aşağıda belirtilmiştir.</span>
+          </p>
+     </div>
+
+     <div>
+          <h2>Model Dosya Kuralları</h2>
+          <div class="description">
+               <ul>
+                    <li>Yüklenmesi gereken model dosyaları .xlsx formatında olmalıdır.</li>
+                    <li>Model excel dosyası 7 sütundan oluşmalıdır.</li>
+                    <li>Bu sütunlar sırasıyla şu şekilde olmalıdır: Rapor Üst Grup, Rapor Grup, Rapor Adı, Rapor Alt Adı, Kolon Adı, Başlangıç Index, Index Uzunluğu</li>
+                    <li>İlk dört sütun ismi veri tabanı tablosu ve sonrasında oluşturulacak excel dosyalarının isimlerini oluşturmamız için kullanılacaktır.</li>
+                    <li>Kolon Adı, Başlangıç Index, Index Uzunluğu sütunları, ayrıştırılacak verilerin isimlerini, başlangıç ve bitiş indexlerini belirler.</li>
+                    <li>Başlangıç indexi, kaçıncı indexten başlanacağını; Index Uzunluğu ise kaç index boyunca ayrıştırma yapılacağını belirler.</li>
+                    <li><span class="sub_description">Not: Satır başlıklarının bir anlamı yoktur, ne yazdığı fark etmez.</span></li>
+               </ul>
+               <img src="{% static 'model_file.png' %}" alt="Model File Example">
+          </div>
+     </div>
+
+     <div>
+          <h2>Ham Data Dosyasının Kuralları</h2>
+          <div class="description">
+               <ul>
+                    <li>Yüklenen ham data dosyası .xlsx formatında olmalıdır.</li>
+                    <li>Yüklenecek olan ham data dosyasının her bir satırında tek bir ham data olmalıdır.</li>
+                    <li>Dosya tek sütun üzerinden ilerlemelidir.</li>
+                    <li>Ham data dosyasında tek tip veri olmalıdır. Birden fazla tip ham data içeren dosya yüklenirse hata ile karşılaşabilirsiniz.</li>
+               </ul>
+               <img src="{% static 'raw_data_correct.png' %}" alt="Doğru Ham Data Örneği">
+               <p class="note">Doğru bir ham data dosyası örneği</p>
+               <img src="{% static 'raw_data_wrong.png' %}" alt="Yanlış Ham Data Örneği">
+               <p class="note">Yanlış bir ham data dosyası örneği</p>
+          </div>
+     </div>
+
+     <div>
+          <h2>Parsing İşlemi için Model Yükleme ve Model Seçimi</h2>
+          <div class="description">
+               <ul>
+                    <li>Model dosyasını yüklemeden önce, "Model Dosya Kuralları" kısmına uygun olduğundan emin olun.</li>
+                    <li>"Model Dosyasını Yükleyin" başlığındaki dosya seçme alanından uygun .xlsx uzantılı dosyayı seçin.</li>
+                    <li>Gönder butonuna basarak model dosyanızı sisteme tanımlayın.</li>
+               </ul>
+          </div>
+     </div>
+
+     <div>
+          <h2>Ham Data Dosyasının Yüklenmesi ve Parsing İşleminin Yapılması</h2>
+          <div class="description">
+               <ul>
+                    <li>Ham data dosyasını yüklemeden önce, "Ham Data Dosyasının Kuralları" kısmına uygun bir dosya seçin.</li>
+                    <li>"Ham Data Dosyasını Yükleyin" başlığının altındaki dosya seçme alanından uygun .xlsx dosyasını seçin.</li>
+                    <li>Gönder butonuna basarak ham data dosyasını sisteme tanımlayın.</li>
+                    <li>Ham data ve model tanımlandıktan sonra "Model Seçin" bölümünden modeli onaylayın ve "Parse" butonuna basarak işlemi gerçekleştirin.</li>
+               </ul>
+          </div>
+     </div>
+
+     <div>
+          <h2>Ayırma İşlemi Yapılmış Verinin Excel Olarak İndirilmesi</h2>
+          <div class="description">
+               <ul>
+                    <li>Ayırma işlemi sonrası, "Excel oluşturulacak modeli seçin" başlığından modelinizi seçin.</li>
+                    <li>Model seçildikten sonra "Excel Oluştur" butonuna basarak excel dosyasını indirin.</li>
+               </ul>
+          </div>
+     </div>
+
+     <div>
+          <h2>Ayrıştırılmış Verinin Tekrar Birleştirilmesi ve Excel Olarak İndirilmesi</h2>
+          <div class="description">
+               <ul>
+                    <li>Ayrıştırılmış verileri birleştirmek için "Sıkıştırılacak Dosyayı Seçin" başlığından ilgili dosyayı seçin.</li>
+                    <li>"Sıkıştır" butonuna basarak verileri ham data haline getirin.</li>
+                    <li>"Ham Data Excel Oluştur" butonuna basarak ham data olarak excel dosyasını indirin.</li>
+               </ul>
+          </div>
+     </div>
+
+     <form action="{% url 'to_main_page' %}">
+          <button type="submit">Ana Sayfa</button>
+     </form>
+
+</body>
+</html>
