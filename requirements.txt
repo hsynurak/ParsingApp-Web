@@ -1,0 +1,6 @@
+Django==4.1
+pandas==2.1.1
+numpy==1.26.4
+openpyxl==3.0.10
+django-import-export==3.3.0
+tablib[html,ods,xls,xlsx,yaml]==3.5.0

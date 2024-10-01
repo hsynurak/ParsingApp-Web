@@ -93,12 +93,7 @@
      <h1>ParsingAppWeb</h1>
 
      <div class="form-container">
-          <form method="POST" enctype="multipart/form-data" action="{% url 'createModel' %}">
-               {% csrf_token %}
-               <label for="excel_file">Model Dosyasını Yükleyin:</label>
-               <input type="file" id="excel_file" name="modelFile" accept=".xlsx">
-               <button type="submit">Gönder</button>
-          </form>
+
 
           <form action="{% url 'index' %}" method="POST" enctype="multipart/form-data">
                {% csrf_token %}
@@ -110,6 +105,13 @@
                {% elif error %}
                <p class="error-message">Bir hata oluştu, tekrar deneyin.</p>
                {% endif %}
+          </form>
+
+          <form method="POST" enctype="multipart/form-data" action="{% url 'createModel' %}">
+               {% csrf_token %}
+               <label for="excel_file">Model Dosyasını Yükleyin:</label>
+               <input type="file" id="excel_file" name="modelFile" accept=".xlsx">
+               <button type="submit">Gönder</button>
           </form>
 
           <form action="{% url 'resetDataBase' %}" method="POST">
