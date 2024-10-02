@@ -1,6 +1,6 @@
 services:
   web:
-    image: huseyinurak/parsingapp-web
+    image: huseyinurak/parsingapp-web:amd64_tag
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
       - ./db.sqlite3:/app/db.sqlite3
