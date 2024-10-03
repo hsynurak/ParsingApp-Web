@@ -2,8 +2,5 @@ services:
   web:
     image: huseyinurak/parsingapp_web:multiarch_tag
     command: python manage.py runserver 0.0.0.0:8000
-    volumes:
-      - .:/app
-      - ./db.sqlite3:/app/db.sqlite3
     ports:
       - "8000:8000"
